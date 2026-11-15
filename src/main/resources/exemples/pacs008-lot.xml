@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lot d'exemple : trois virements entre deux institutions fictives (0815 et 0006). -->
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08">
+  <FIToFICstmrCdtTrf>
+    <GrpHdr>
+      <MsgId>LOT-20261116-001</MsgId>
+      <CreDtTm>2026-11-16T09:30:00-05:00</CreDtTm>
+      <NbOfTxs>3</NbOfTxs>
+      <SttlmInf><SttlmMtd>CLRG</SttlmMtd></SttlmInf>
+    </GrpHdr>
+    <CdtTrfTxInf>
+      <PmtId><EndToEndId>LOYER-NOV-2026</EndToEndId><UETR>b3c1e0a2-6f1d-4c2e-9a7b-1d2e3f4a5b6c</UETR></PmtId>
+      <IntrBkSttlmAmt Ccy="CAD">125.50</IntrBkSttlmAmt>
+      <ChrgBr>SLEV</ChrgBr>
+      <Dbtr><Nm>Alice Tremblay</Nm></Dbtr>
+      <DbtrAcct><Id><Othr><Id>CA-815-0001</Id></Othr></Id></DbtrAcct>
+      <DbtrAgt><FinInstnId><ClrSysMmbId><MmbId>0815</MmbId></ClrSysMmbId></FinInstnId></DbtrAgt>
+      <CdtrAgt><FinInstnId><ClrSysMmbId><MmbId>0006</MmbId></ClrSysMmbId></FinInstnId></CdtrAgt>
+      <Cdtr><Nm>Bruno Côté</Nm></Cdtr>
+      <CdtrAcct><Id><Othr><Id>CA-006-0001</Id></Othr></Id></CdtrAcct>
+      <RmtInf><Ustrd>Loyer novembre</Ustrd></RmtInf>
+    </CdtTrfTxInf>
+    <CdtTrfTxInf>
+      <PmtId><EndToEndId>FACT-2026-0042</EndToEndId></PmtId>
+      <IntrBkSttlmAmt Ccy="CAD">80.00</IntrBkSttlmAmt>
+      <ChrgBr>SLEV</ChrgBr>
+      <Dbtr><Nm>Chloé Gagnon</Nm></Dbtr>
+      <DbtrAcct><Id><Othr><Id>CA-815-0002</Id></Othr></Id></DbtrAcct>
+      <DbtrAgt><FinInstnId><ClrSysMmbId><MmbId>0815</MmbId></ClrSysMmbId></FinInstnId></DbtrAgt>
+      <CdtrAgt><FinInstnId><ClrSysMmbId><MmbId>0006</MmbId></ClrSysMmbId></FinInstnId></CdtrAgt>
+      <Cdtr><Nm>Bruno Côté</Nm></Cdtr>
+      <CdtrAcct><Id><Othr><Id>CA-006-0001</Id></Othr></Id></CdtrAcct>
+    </CdtTrfTxInf>
+    <CdtTrfTxInf>
+      <PmtId><EndToEndId>REMB-2026-0007</EndToEndId></PmtId>
+      <IntrBkSttlmAmt Ccy="CAD">15.00</IntrBkSttlmAmt>
+      <ChrgBr>SLEV</ChrgBr>
+      <Dbtr><Nm>Alice Tremblay</Nm></Dbtr>
+      <DbtrAcct><Id><Othr><Id>CA-815-0001</Id></Othr></Id></DbtrAcct>
+      <DbtrAgt><FinInstnId><ClrSysMmbId><MmbId>0815</MmbId></ClrSysMmbId></FinInstnId></DbtrAgt>
+      <CdtrAgt><FinInstnId><ClrSysMmbId><MmbId>0006</MmbId></ClrSysMmbId></FinInstnId></CdtrAgt>
+      <Cdtr><Nm>Compte fermé</Nm></Cdtr>
+      <CdtrAcct><Id><Othr><Id>CA-006-0099</Id></Othr></Id></CdtrAcct>
+    </CdtTrfTxInf>
+  </FIToFICstmrCdtTrf>
+</Document>

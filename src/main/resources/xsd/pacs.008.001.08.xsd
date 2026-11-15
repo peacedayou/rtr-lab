@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sous-ensemble pédagogique de pacs.008.001.08 (FIToFICustomerCreditTransfer).
+     Mêmes noms d'éléments, même espace de noms et même ordre que le schéma ISO 20022 officiel,
+     limités à ce dont rtr-lab a besoin. Pour valider contre le schéma complet, remplacez ce fichier
+     par celui publié sur iso20022.org. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08"
+           targetNamespace="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08"
+           elementFormDefault="qualified">
+  <xs:element name="Document" type="Document"/>
+  <xs:complexType name="Document">
+    <xs:sequence><xs:element name="FIToFICstmrCdtTrf" type="FIToFICustomerCreditTransferV08"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FIToFICustomerCreditTransferV08">
+    <xs:sequence>
+      <xs:element name="GrpHdr" type="GroupHeader93"/>
+      <xs:element name="CdtTrfTxInf" type="CreditTransferTransaction39" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroupHeader93">
+    <xs:sequence>
+      <xs:element name="MsgId" type="Max35Text"/>
+      <xs:element name="CreDtTm" type="xs:dateTime"/>
+      <xs:element name="NbOfTxs" type="Max15NumericText"/>
+      <xs:element name="SttlmInf" type="SettlementInstruction7"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SettlementInstruction7">
+    <xs:sequence><xs:element name="SttlmMtd" type="SettlementMethod1Code"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreditTransferTransaction39">
+    <xs:sequence>
+      <xs:element name="PmtId" type="PaymentIdentification7"/>
+      <xs:element name="IntrBkSttlmAmt" type="ActiveCurrencyAndAmount"/>
+      <xs:element name="IntrBkSttlmDt" type="xs:date" minOccurs="0"/>
+      <xs:element name="ChrgBr" type="ChargeBearerType1Code"/>
+      <xs:element name="Dbtr" type="PartyIdentification135"/>
+      <xs:element name="DbtrAcct" type="CashAccount38"/>
+      <xs:element name="DbtrAgt" type="BranchAndFinancialInstitutionIdentification6"/>
+      <xs:element name="CdtrAgt" type="BranchAndFinancialInstitutionIdentification6"/>
+      <xs:element name="Cdtr" type="PartyIdentification135"/>
+      <xs:element name="CdtrAcct" type="CashAccount38"/>
+      <xs:element name="RmtInf" type="RemittanceInformation16" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PaymentIdentification7">
+    <xs:sequence>
+      <xs:element name="InstrId" type="Max35Text" minOccurs="0"/>
+      <xs:element name="EndToEndId" type="Max35Text"/>
+      <xs:element name="UETR" type="UUIDv4Identifier" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartyIdentification135">
+    <xs:sequence><xs:element name="Nm" type="Max140Text"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CashAccount38">
+    <xs:sequence><xs:element name="Id" type="AccountIdentification4Choice"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccountIdentification4Choice">
+    <xs:sequence><xs:element name="Othr" type="GenericAccountIdentification1"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GenericAccountIdentification1">
+    <xs:sequence><xs:element name="Id" type="Max34Text"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BranchAndFinancialInstitutionIdentification6">
+    <xs:sequence><xs:element name="FinInstnId" type="FinancialInstitutionIdentification18"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FinancialInstitutionIdentification18">
+    <xs:sequence><xs:element name="ClrSysMmbId" type="ClearingSystemMemberIdentification2"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClearingSystemMemberIdentification2">
+    <xs:sequence><xs:element name="MmbId" type="Max35Text"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RemittanceInformation16">
+    <xs:sequence><xs:element name="Ustrd" type="Max140Text" minOccurs="0" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ActiveCurrencyAndAmount">
+    <xs:simpleContent>
+      <xs:extension base="ActiveCurrencyAndAmount_SimpleType">
+        <xs:attribute name="Ccy" type="ActiveCurrencyCode" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="ActiveCurrencyAndAmount_SimpleType">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="5"/><xs:totalDigits value="18"/><xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ActiveCurrencyCode"><xs:restriction base="xs:string"><xs:pattern value="[A-Z]{3,3}"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="SettlementMethod1Code"><xs:restriction base="xs:string"><xs:enumeration value="INDA"/><xs:enumeration value="INGA"/><xs:enumeration value="COVE"/><xs:enumeration value="CLRG"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="ChargeBearerType1Code"><xs:restriction base="xs:string"><xs:enumeration value="DEBT"/><xs:enumeration value="CRED"/><xs:enumeration value="SHAR"/><xs:enumeration value="SLEV"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="UUIDv4Identifier"><xs:restriction base="xs:string"><xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="Max15NumericText"><xs:restriction base="xs:string"><xs:pattern value="[0-9]{1,15}"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="Max34Text"><xs:restriction base="xs:string"><xs:minLength value="1"/><xs:maxLength value="34"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="Max35Text"><xs:restriction base="xs:string"><xs:minLength value="1"/><xs:maxLength value="35"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="Max140Text"><xs:restriction base="xs:string"><xs:minLength value="1"/><xs:maxLength value="140"/></xs:restriction></xs:simpleType>
+</xs:schema>

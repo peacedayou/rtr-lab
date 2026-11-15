@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: rtr-lab
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/rtrlab}
+    username: ${DATABASE_USER:rtrlab}
+    password: ${DATABASE_PASSWORD:rtrlab}
+  sql:
+    init:
+      mode: always
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    consumer:
+      group-id: rapprochement
+      auto-offset-reset: earliest
+
+rtr:
+  limite-par-transaction: 10000.00
+  sujets:
+    pacs002: rtr.pacs002
+    camt054: rtr.camt054
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
