@@ -17,7 +17,7 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - name: Tests unitaires et d'intégration (Testcontainers : PostgreSQL et Kafka)
+      - name: "Tests unitaires et d'intégration (Testcontainers, PostgreSQL et Kafka)"
         run: mvn -B verify
 
   demo-docker:
